@@ -14,9 +14,11 @@ const Banner = () => {
       }}
     >
       <div class="hero-content flex-col lg:flex-row-reverse">
-        <img src={chair} />
-        <div class="">
-          <h1 class="text-5xl font-bold">Your New Smile Starts Here!</h1>
+        <img className="bannerImg" src={chair} />
+        <div>
+          <h1 class="text-3xl lg:text-5xl font-bold">
+            Your New Smile Starts Here!
+          </h1>
           <p class="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et

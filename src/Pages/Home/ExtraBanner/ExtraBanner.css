@@ -1,10 +1,9 @@
-.bannerImg {
-  width: 594px;
-  height: 355px;
+.extraBannerImg {
+  width: 355px;
 }
 
 @media screen and (max-width: 992px) {
-  .bannerImg {
+  .extraBannerImg {
     width: 100%;
     height: 100%;
   }
