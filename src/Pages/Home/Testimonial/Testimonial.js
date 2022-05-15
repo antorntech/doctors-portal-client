@@ -36,8 +36,8 @@ const Testimonial = () => {
     <section className="mt-16">
       <div className="testimonial-header flex justify-between items-start">
         <div>
-          <h3 className="lg:text-2xl text-primary">Testimonial</h3>
-          <h2 className="lg:text-4xl">What Our Patients Says</h2>
+          <h3 className="text-3xl lg:text-2xl text-primary">Testimonial</h3>
+          <h2 className="text-3xl lg:text-4xl">What Our Patients Says</h2>
         </div>
         <div>
           <img className="w-40" src={quote} alt="" />
