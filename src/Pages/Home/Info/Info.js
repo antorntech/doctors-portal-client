@@ -9,17 +9,17 @@ const Info = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 py-10 lg:py-20">
       <InfoCard
-        bgclassName="bg-gradient-to-r from-secondary to-primary"
+        bgclass="bg-gradient-to-r from-secondary to-primary"
         cardTitle="Opening Hours"
         img={clock}
       ></InfoCard>
       <InfoCard
-        bgclassName="bg-accent"
+        bgclass="bg-accent"
         cardTitle="Our Locations"
         img={marker}
       ></InfoCard>
       <InfoCard
-        bgclassName="bg-gradient-to-r from-secondary to-primary"
+        bgclass="bg-gradient-to-r from-secondary to-primary"
         cardTitle="Contact Us"
         img={phone}
       ></InfoCard>
