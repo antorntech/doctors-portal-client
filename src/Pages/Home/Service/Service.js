@@ -3,12 +3,12 @@ import "./Service.css";
 
 const Service = ({ service }) => {
   return (
-    <div class="card lg:max-w-lg bg-base-100 shadow-xl">
-      <figure class="px-10 pt-10">
+    <div className="card lg:max-w-lg bg-base-100 shadow-xl">
+      <figure className="px-10 pt-10">
         <img src={service.img} />
       </figure>
-      <div class="card-body items-center text-center">
-        <h2 class="card-title">{service.name}</h2>
+      <div className="card-body items-center text-center">
+        <h2 className="card-title">{service.name}</h2>
         <p>{service.description}</p>
       </div>
     </div>
