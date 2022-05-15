@@ -1,13 +1,14 @@
 import React from "react";
+import "./Banner.css";
 import chair from "../../../assets/images/chair.png";
 
 const Banner = () => {
   return (
-    <div class="hero min-h-screen ">
+    <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
         <img src={chair} />
-        <div>
-          <h1 class="text-5xl font-bold">Box Office News!</h1>
+        <div class="lg:p-5">
+          <h1 class="text-5xl font-bold">Your New Smile Starts Here!</h1>
           <p class="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
