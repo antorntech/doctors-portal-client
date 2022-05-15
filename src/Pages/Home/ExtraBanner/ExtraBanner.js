@@ -4,7 +4,7 @@ import treatmentImg from "../../../assets/images/treatment.png";
 
 const ExtraBanner = () => {
   return (
-    <div class="hero min-h-screen lg:px-12">
+    <div class="hero min-h-screen lg:px-12 my-28">
       <div class="hero-content flex-col lg:flex-row lg:px-12">
         <img src={treatmentImg} class="extraBannerImg rounded-lg shadow-2xl" />
         <div className="lg:px-12">

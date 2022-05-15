@@ -3,6 +3,7 @@ import Banner from "./Banner/Banner";
 import ExtraBanner from "./ExtraBanner/ExtraBanner";
 import "./Home.css";
 import Info from "./Info/Info";
+import MakeAppointment from "./MakeAppointment/MakeAppointment";
 import Services from "./Services/Services";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <Info></Info>
       <Services></Services>
       <ExtraBanner></ExtraBanner>
+      <MakeAppointment></MakeAppointment>
     </div>
   );
 };
