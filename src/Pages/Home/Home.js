@@ -1,10 +1,11 @@
 import React from "react";
+import Banner from "./Banner/Banner";
 import "./Home.css";
 
 const Home = () => {
   return (
     <div>
-      <h1>Welcome To Doctor Portal</h1>
+      <Banner></Banner>
     </div>
   );
 };
