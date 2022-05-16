@@ -1,14 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Login/SocialLogin/SocialLogin";
 import "./SignUp.css";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const SignUp = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+    createUserWithEmailAndPassword(email, password);
+  };
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (user) {
+    navigate("/home");
+  }
   return (
     <div className="py-28 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
         <h2 className="text-3xl font-bold mb-6">Sign Up</h2>
-        <form>
+        <form onSubmit={handleSignUp}>
           <label class="label lg:pl-12">
             <span class="label-text text-lg">Name</span>
           </label>

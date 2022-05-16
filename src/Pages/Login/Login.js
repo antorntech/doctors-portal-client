@@ -1,14 +1,39 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import auth from "../../firebase.init";
 import "./Login.css";
 import SocialLogin from "./SocialLogin/SocialLogin";
 
 const Login = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
+  };
+  if (loading) {
+    toast("Loading...");
+  }
+
+  if (user) {
+    navigate("/home");
+  }
+
+  if (error) {
+    toast(error.message);
+  }
+
   return (
     <div className="py-28 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
         <h2 className="text-3xl font-bold mb-6">Login</h2>
-        <form>
+        <form onSubmit={handleLogin}>
           <label class="label lg:pl-12">
             <span class="label-text text-lg">Email</span>
           </label>
@@ -40,7 +65,7 @@ const Login = () => {
             Create new account
           </Link>
         </span>
-
+        <ToastContainer />
         <div className="flex items-center lg:px-5 py-5">
           <div className="border-b-2 w-2/3"></div>
           <span className="px-3">OR</span>
