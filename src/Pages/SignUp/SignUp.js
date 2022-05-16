@@ -1,14 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Login.css";
-import SocialLogin from "./SocialLogin/SocialLogin";
+import SocialLogin from "../Login/SocialLogin/SocialLogin";
+import "./SignUp.css";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <div className="py-28 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
-        <h2 className="text-3xl font-bold mb-6">Login</h2>
+        <h2 className="text-3xl font-bold mb-6">Sign Up</h2>
         <form>
+          <label class="label lg:pl-12">
+            <span class="label-text text-lg">Name</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            class="input input-bordered w-full max-w-xs mb-2"
+          />
           <label class="label lg:pl-12">
             <span class="label-text text-lg">Email</span>
           </label>
@@ -36,8 +45,8 @@ const Login = () => {
         </form>
         <span>
           New to Doctors Portal ?{" "}
-          <Link to="/signup" className="text-secondary">
-            Create new account
+          <Link to="/login" className="text-secondary">
+            Already have an account
           </Link>
         </span>
 
@@ -52,4 +61,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
