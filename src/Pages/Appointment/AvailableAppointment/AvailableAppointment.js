@@ -14,8 +14,8 @@ const AvailableAppointment = ({ date }) => {
       .then((json) => setServices(json));
   }, []);
   return (
-    <div className="px-5 lg:px-0">
-      <div className="text-center text-secondary text-xl">
+    <div className="px-5 lg:px-0 my-10">
+      <div className="text-center text-secondary text-xl pb-10">
         <p>Available Appointments on {format(date, "PP")}</p>
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -27,7 +27,9 @@ const AvailableAppointment = ({ date }) => {
           ></AppointService>
         ))}
       </div>
-      {treatment && <BookingModal treatment={treatment}></BookingModal>}
+      {treatment && (
+        <BookingModal date={date} treatment={treatment}></BookingModal>
+      )}
     </div>
   );
 };
