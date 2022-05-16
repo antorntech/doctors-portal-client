@@ -1,8 +1,11 @@
 import React from "react";
 import { format } from "date-fns";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
   const { name, slots } = treatment;
+  const [user] = useAuthState(auth);
 
   const handleBooking = (event) => {
     event.preventDefault();
@@ -21,7 +24,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
         <div className="modal-box">
           <label
             for="booking-modal"
-            class="btn btn-sm btn-circle absolute right-2 top-2"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
@@ -34,9 +37,12 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
               type="text"
               disabled
               value={format(date, "PP")}
-              class="input input-bordered input-secondary w-full max-w-xs"
+              className="input input-bordered input-secondary w-full max-w-xs"
             />
-            <select name="slot" class="select select-secondary w-full max-w-xs">
+            <select
+              name="slot"
+              className="select select-secondary w-full max-w-xs"
+            >
               {slots.map((slot) => (
                 <option value={slot}>{slot}</option>
               ))}
@@ -44,25 +50,27 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             <input
               type="text"
               name="name"
-              placeholder="Your Name"
-              class="input input-bordered input-secondary w-full max-w-xs"
+              disabled
+              value={user?.displayName}
+              className="input input-bordered input-secondary w-full max-w-xs"
             />
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
-              class="input input-bordered input-secondary w-full max-w-xs"
+              disabled
+              value={user?.email}
+              className="input input-bordered input-secondary w-full max-w-xs"
             />
             <input
               type="text"
               name="phone"
               placeholder="Phone Number"
-              class="input input-bordered input-secondary w-full max-w-xs"
+              className="input input-bordered input-secondary w-full max-w-xs"
             />
             <input
               type="submit"
               placeholder="Type here"
-              class="btn btn-secondary w-full max-w-xs"
+              className="btn btn-secondary w-full max-w-xs"
             />
           </form>
         </div>

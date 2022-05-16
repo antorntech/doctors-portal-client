@@ -36,38 +36,38 @@ const SignUp = () => {
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
         <h2 className="text-3xl font-bold mb-6">Sign Up</h2>
         <form onSubmit={handleSignUp}>
-          <label class="label lg:pl-12">
-            <span class="label-text text-lg">Name</span>
+          <label className="label lg:pl-12">
+            <span className="label-text text-lg">Name</span>
           </label>
           <input
             type="text"
             name="name"
             placeholder="Enter your name"
-            class="input input-bordered w-full max-w-xs mb-2"
+            className="input input-bordered w-full max-w-xs mb-2"
           />
-          <label class="label lg:pl-12">
-            <span class="label-text text-lg">Email</span>
+          <label className="label lg:pl-12">
+            <span className="label-text text-lg">Email</span>
           </label>
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
-            class="input input-bordered w-full max-w-xs mb-2"
+            className="input input-bordered w-full max-w-xs mb-2"
           />
-          <label class="label lg:pl-12">
-            <span class="label-text text-lg">Password</span>
+          <label className="label lg:pl-12">
+            <span className="label-text text-lg">Password</span>
           </label>
           <input
             type="password"
             name="password"
             placeholder="Enter your password"
-            class="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs"
           />
           <h3 className="text-left text-sm lg:pl-12 mb-4">Forget Password ?</h3>
           <input
             type="submit"
             value="Login"
-            class="btn btn-accent w-full max-w-xs mb-2"
+            className="btn btn-accent w-full max-w-xs mb-2"
           />
         </form>
         <span>
