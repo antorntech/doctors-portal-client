@@ -1,11 +1,11 @@
 import React from "react";
 
-const AppointService = ({ service }) => {
+const AppointService = ({ service, setTreatment }) => {
   const { name, slots } = service;
   return (
-    <div class="card lg:max-w-lg bg-base-100 shadow-xl place-items-center">
-      <div class="card-body place-items-center pt-3 lg:pt-10">
-        <h2 class="card-title text-secondary">{name}</h2>
+    <div className="card lg:max-w-lg bg-base-100 shadow-xl place-items-center">
+      <div className="card-body place-items-center pt-3 lg:pt-10">
+        <h2 className="card-title text-secondary">{name}</h2>
         <p>
           {slots.length > 0 ? (
             <span>{slots[0]}</span>
@@ -16,13 +16,15 @@ const AppointService = ({ service }) => {
         <p>
           {slots.length} {slots.length > 1 ? "spaces" : "space"} available
         </p>
-        <div class="card-actions">
-          <button
+        <div className="card-actions">
+          <label
+            htmlFor="booking-modal"
+            onClick={() => setTreatment(service)}
             disabled={slots.length === 0}
             className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary"
           >
             Book Appointment
-          </button>
+          </label>
         </div>
       </div>
     </div>
