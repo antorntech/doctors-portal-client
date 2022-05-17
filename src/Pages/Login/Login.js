@@ -48,7 +48,7 @@ const Login = () => {
   };
 
   return (
-    <div className="py-28 px-5 lg:px-0">
+    <div className="py-12 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
         <h2 className="text-3xl font-bold mb-6">Login</h2>
         <form onSubmit={handleLogin}>
@@ -72,7 +72,7 @@ const Login = () => {
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs"
           />
-          <label class="label lg:pl-12 mb-2">
+          <label className="label lg:pl-12 mb-2">
             <button onClick={handleResetPassword}>Forgot Password ?</button>
           </label>
           <input

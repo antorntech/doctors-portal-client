@@ -15,6 +15,7 @@ const SocialLogin = () => {
   if (loading) {
     toast.loading("Please Wait", {
       render: "All is good",
+      autoClose: 3000,
       type: "success",
       isLoading: false,
     });
@@ -23,7 +24,7 @@ const SocialLogin = () => {
   if (googleError) {
     toast.error("🦄 Popup closed by user!", {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
