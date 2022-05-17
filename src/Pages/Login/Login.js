@@ -1,5 +1,9 @@
+import { async } from "@firebase/util";
 import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,24 +14,12 @@ import SocialLogin from "./SocialLogin/SocialLogin";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, resetError] =
+    useSendPasswordResetEmail(auth);
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    console.log(email, password);
-    signInWithEmailAndPassword(email, password);
-  };
-  if (loading) {
-    toast.loading("Please Wait", {
-      render: "All is good",
-      type: "success",
-      isLoading: false,
-    });
-  }
 
   if (user) {
     navigate(from, { replace: true });
@@ -36,6 +28,24 @@ const Login = () => {
   if (error) {
     toast(error.message);
   }
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
+  };
+
+  const handleResetPassword = async (event) => {
+    const email = event.target.email.value;
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Sent Email");
+    } else {
+      toast("Please enter your email");
+    }
+  };
 
   return (
     <div className="py-28 px-5 lg:px-0">
@@ -62,7 +72,9 @@ const Login = () => {
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs"
           />
-          <h3 className="text-left text-sm lg:pl-12 mb-4">Forget Password ?</h3>
+          <label class="label lg:pl-12 mb-2">
+            <button onClick={handleResetPassword}>Forgot Password ?</button>
+          </label>
           <input
             type="submit"
             value="Login"

@@ -2,19 +2,42 @@ import React from "react";
 import { format } from "date-fns";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
-  const { name, slots } = treatment;
+  const { _id, name, slots } = treatment;
   const [user] = useAuthState(auth);
+  const formateDate = format(date, "PP");
 
   const handleBooking = (event) => {
     event.preventDefault();
     const slot = event.target.slot.value;
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const phone = event.target.phone.value;
-    console.log(slot, name, email, phone);
-    setTreatment(null);
+
+    const booking = {
+      treatmentId: _id,
+      treatment: name,
+      date: formateDate,
+      slot,
+      patient: user.email,
+      patientName: user.displayName,
+      phone: event.target.phone.value,
+    };
+
+    fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast("Successfully Added");
+        console.log(data);
+        // to close the modal
+        setTreatment(null);
+      });
   };
 
   return (
@@ -73,6 +96,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
               className="btn btn-secondary w-full max-w-xs"
             />
           </form>
+          <ToastContainer />
         </div>
       </div>
     </div>

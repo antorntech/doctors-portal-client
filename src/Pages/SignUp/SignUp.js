@@ -23,10 +23,14 @@ const SignUp = () => {
     console.log(email, password);
     await createUserWithEmailAndPassword(email, password);
     await sendEmailVerification();
-    toast.success("Sent email");
+    toast("Sent email");
   };
 
   //do something else
+  if (sending) {
+    toast.success("Sent email");
+  }
+
   if (loading) {
     toast.loading("Please Wait", {
       render: "All is good",
