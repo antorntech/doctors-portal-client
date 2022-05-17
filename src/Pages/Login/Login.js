@@ -1,7 +1,8 @@
 import React from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase.init";
 import "./Login.css";
 import SocialLogin from "./SocialLogin/SocialLogin";
@@ -21,7 +22,11 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
   };
   if (loading) {
-    toast("Loading...");
+    toast.loading("Please Wait", {
+      render: "All is good",
+      type: "success",
+      isLoading: false,
+    });
   }
 
   if (user) {
@@ -41,6 +46,7 @@ const Login = () => {
             <span className="label-text text-lg">Email</span>
           </label>
           <input
+            required
             type="email"
             name="email"
             placeholder="Enter your email"
@@ -50,6 +56,7 @@ const Login = () => {
             <span className="label-text text-lg">Password</span>
           </label>
           <input
+            required
             type="password"
             name="password"
             placeholder="Enter your password"

@@ -2,35 +2,55 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Login/SocialLogin/SocialLogin";
 import "./SignUp.css";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [sendEmailVerification, sending] = useSendEmailVerification(auth);
   const navigate = useNavigate();
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password);
-    createUserWithEmailAndPassword(email, password);
+    await createUserWithEmailAndPassword(email, password);
+    await sendEmailVerification();
+    toast.success("Sent email");
   };
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
+
+  //do something else
   if (loading) {
-    return <p>Loading...</p>;
+    toast.loading("Please Wait", {
+      render: "All is good",
+      type: "success",
+      isLoading: false,
+    });
   }
 
   if (user) {
     navigate("/home");
   }
+
+  if (error) {
+    toast.error(error.message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   return (
     <div className="py-28 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
@@ -49,6 +69,7 @@ const SignUp = () => {
             <span className="label-text text-lg">Email</span>
           </label>
           <input
+            required
             type="email"
             name="email"
             placeholder="Enter your email"
@@ -58,15 +79,16 @@ const SignUp = () => {
             <span className="label-text text-lg">Password</span>
           </label>
           <input
+            required
             type="password"
             name="password"
             placeholder="Enter your password"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs mb-5"
           />
-          <h3 className="text-left text-sm lg:pl-12 mb-4">Forget Password ?</h3>
+
           <input
             type="submit"
-            value="Login"
+            value="Sign Up"
             className="btn btn-accent w-full max-w-xs mb-2"
           />
         </form>
@@ -83,6 +105,7 @@ const SignUp = () => {
           <div className="border-b-2 w-2/3"></div>
         </div>
         <SocialLogin></SocialLogin>
+        <ToastContainer />
       </div>
     </div>
   );

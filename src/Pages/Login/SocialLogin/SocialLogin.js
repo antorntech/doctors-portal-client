@@ -1,7 +1,8 @@
 import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../firebase.init";
 
 const SocialLogin = () => {
@@ -11,12 +12,24 @@ const SocialLogin = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  if (googleError) {
-    toast(googleError?.message);
+  if (loading) {
+    toast.loading("Please Wait", {
+      render: "All is good",
+      type: "success",
+      isLoading: false,
+    });
   }
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if (googleError) {
+    toast.error("🦄 Popup closed by user!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   if (user) {
