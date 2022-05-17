@@ -3,25 +3,32 @@ import React, { useEffect, useState } from "react";
 import AppointService from "../../AppointService/AppointService";
 import BookingModal from "../BookingModal/BookingModal";
 import "./AvailableAppointment.css";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import Loading from "../../Shared/Loading";
 
 const AvailableAppointment = ({ date }) => {
-  const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
 
-  const formatedDate = format(date, "PP");
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/available?date=${formatedDate}`)
-      .then((res) => res.json())
-      .then((json) => setServices(json));
-  }, []);
+  const formattedDate = format(date, "PP");
+  const {
+    data: services,
+    isLoading,
+    refetch,
+  } = useQuery(["available", formattedDate], () =>
+    fetch(`http://localhost:5000/available?date=${formattedDate}`).then((res) =>
+      res.json()
+    )
+  );
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="px-5 lg:px-0 my-10">
       <div className="text-center text-secondary text-xl pb-10">
         <p>Available Appointments on {format(date, "PP")}</p>
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {services.map((service) => (
+        {services?.map((service) => (
           <AppointService
             key={service._id}
             service={service}
@@ -34,6 +41,7 @@ const AvailableAppointment = ({ date }) => {
           date={date}
           treatment={treatment}
           setTreatment={setTreatment}
+          refetch={refetch}
         ></BookingModal>
       )}
     </div>
