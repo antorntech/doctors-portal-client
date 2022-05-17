@@ -7,7 +7,7 @@ import {
   useSendEmailVerification,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
@@ -109,7 +109,6 @@ const SignUp = () => {
           <div className="border-b-2 w-2/3"></div>
         </div>
         <SocialLogin></SocialLogin>
-        <ToastContainer />
       </div>
     </div>
   );

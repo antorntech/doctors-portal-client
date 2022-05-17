@@ -5,7 +5,7 @@ import {
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase.init";
 import "./Login.css";
@@ -87,7 +87,6 @@ const Login = () => {
             Create new account
           </Link>
         </span>
-        <ToastContainer />
         <div className="flex items-center lg:px-5 py-5">
           <div className="border-b-2 w-2/3"></div>
           <span className="px-3">OR</span>
