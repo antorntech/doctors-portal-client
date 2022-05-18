@@ -4,10 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../../firebase.init";
+import useToken from "../../../hooks/useToken";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, googleError] =
     useSignInWithGoogle(auth);
+  const [token] = useToken(user);
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";

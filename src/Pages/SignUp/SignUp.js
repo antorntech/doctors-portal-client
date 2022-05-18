@@ -9,11 +9,15 @@ import {
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [sendEmailVerification, sending] = useSendEmailVerification(auth);
+
+  const [token] = useToken(user);
+
   const navigate = useNavigate();
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -35,18 +39,19 @@ const SignUp = () => {
     toast.loading("Please Wait", {
       render: "All is good",
       type: "success",
+      autoClose: 2000,
       isLoading: false,
     });
   }
 
-  if (user) {
+  if (token) {
     navigate("/home");
   }
 
   if (error) {
     toast.error(error.message, {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -56,7 +61,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="py-28 px-5 lg:px-0">
+    <div className="py-12 px-5 lg:px-0">
       <div className="text-center lg:w-2/6 boxShadow mx-auto p-5">
         <h2 className="text-3xl font-bold mb-6">Sign Up</h2>
         <form onSubmit={handleSignUp}>
