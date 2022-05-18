@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase.init";
+import useToken from "../../hooks/useToken";
 import "./Login.css";
 import SocialLogin from "./SocialLogin/SocialLogin";
 
@@ -16,17 +17,22 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending, resetError] =
     useSendPasswordResetEmail(auth);
+  const [token] = useToken(user);
 
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
 
   if (error) {
     toast(error.message);
+  }
+
+  if (sending) {
+    toast("Sent Email");
   }
 
   const handleLogin = (event) => {

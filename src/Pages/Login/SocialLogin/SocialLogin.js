@@ -7,9 +7,9 @@ import auth from "../../../firebase.init";
 import useToken from "../../../hooks/useToken";
 
 const SocialLogin = () => {
-  const [signInWithGoogle, user, loading, googleError] =
+  const [signInWithGoogle, guser, loading, googleError] =
     useSignInWithGoogle(auth);
-  const [token] = useToken(user);
+  const [token] = useToken(guser);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,7 +36,7 @@ const SocialLogin = () => {
     });
   }
 
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
   return (
