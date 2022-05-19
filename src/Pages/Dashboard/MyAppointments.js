@@ -24,7 +24,7 @@ const MyAppointments = () => {
           if (res.status === 401 || res.status === 403) {
             signOut(auth);
             localStorage.removeItem("accessToken");
-            navigate("home");
+            navigate("/");
           }
           return res.json();
         })
@@ -35,7 +35,7 @@ const MyAppointments = () => {
   }, [user]);
   return (
     <div className="px-6 lg:px-12">
-      <h2 className="text-xl">Appointments - {appointments.length}</h2>
+      <h2 className="text-xl py-2">Appointments - {appointments.length}</h2>
       <div class="overflow-x-auto mt-2 lg:mt-5">
         <table class="table w-full">
           <thead>

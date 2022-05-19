@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useToken = (user) => {
+  console.log(user);
   const [token, setToken] = useState("");
 
   useEffect(() => {
