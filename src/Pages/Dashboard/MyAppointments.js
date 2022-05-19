@@ -10,12 +10,15 @@ const MyAppointments = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/booking?patient=${user.email}`, {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://afternoon-caverns-76904.herokuapp.com/booking?patient=${user.email}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => {
           console.log("res", res);
           if (res.status === 401 || res.status === 403) {
@@ -31,7 +34,7 @@ const MyAppointments = () => {
     }
   }, [user]);
   return (
-    <div className="lg:px-12">
+    <div className="px-6 lg:px-12">
       <h2 className="text-xl">Appointments - {appointments.length}</h2>
       <div class="overflow-x-auto mt-2 lg:mt-5">
         <table class="table w-full">
