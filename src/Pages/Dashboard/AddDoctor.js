@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Loading from "../Shared/Loading";
 
 const AddDoctor = () => {
@@ -39,7 +40,16 @@ const AddDoctor = () => {
           })
             .then((res) => res.json())
             .then((inserted) => {
-              console.log("inserted", inserted);
+              if (inserted.insertedId) {
+                toast.success("Successfully add doctor", {
+                  autoClose: 1000,
+                });
+                event.target.reset();
+              } else {
+                toast.error("Failed to add doctor", {
+                  autoClose: 1000,
+                });
+              }
             });
         }
         console.log("imgBB", result);
