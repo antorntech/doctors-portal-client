@@ -1,8 +1,14 @@
 import React from "react";
 import doctorImg from "../../../assets/images/doctor.png";
 import appointment from "../../../assets/images/appointment.png";
+import { useNavigate } from "react-router-dom";
 
 const MakeAppointment = () => {
+  const navigate = useNavigate();
+
+  const startAppointment = () => {
+    navigate("/appointment");
+  };
   return (
     <section
       style={{
@@ -22,7 +28,10 @@ const MakeAppointment = () => {
           week. After a few questions, she hung up with an appointment scheduled
           for the following Saturday.
         </p>
-        <button className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary my-3">
+        <button
+          onClick={startAppointment}
+          className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary my-3"
+        >
           Get Started
         </button>
       </div>

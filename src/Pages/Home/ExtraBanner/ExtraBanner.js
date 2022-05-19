@@ -1,8 +1,14 @@
 import React from "react";
 import "./ExtraBanner.css";
 import treatmentImg from "../../../assets/images/treatment.png";
+import { useNavigate } from "react-router-dom";
 
 const ExtraBanner = () => {
+  const navigate = useNavigate();
+
+  const startAppointment = () => {
+    navigate("/appointment");
+  };
   return (
     <div className="hero min-h-screen lg:px-12 my-28">
       <div className="hero-content flex-col lg:flex-row lg:px-12">
@@ -22,7 +28,10 @@ const ExtraBanner = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <button className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">
+          <button
+            onClick={startAppointment}
+            className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary"
+          >
             Get Started
           </button>
         </div>

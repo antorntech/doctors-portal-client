@@ -2,8 +2,15 @@ import React from "react";
 import "./Banner.css";
 import chair from "../../../assets/images/chair.png";
 import backgroundImg from "../../../assets/images/bg.png";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
+  const startAppointment = () => {
+    navigate("/appointment");
+  };
+
   return (
     <div
       className="hero min-h-screen"
@@ -24,7 +31,10 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">
+          <button
+            onClick={startAppointment}
+            className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary"
+          >
             Get Started
           </button>
         </div>
