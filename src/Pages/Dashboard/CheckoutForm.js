@@ -7,6 +7,7 @@ const CheckoutForm = ({ appointment }) => {
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
 
   const { price, patient, patientName } = appointment;
@@ -65,6 +66,7 @@ const CheckoutForm = ({ appointment }) => {
       setCardError(intentError?.message);
     } else {
       setCardError("");
+      setTransactionId(paymentIntent.id);
       console.log(paymentIntent);
       setSuccess("Congrats! Your payment is completed");
     }
@@ -97,7 +99,15 @@ const CheckoutForm = ({ appointment }) => {
         </button>
       </form>
       {cardError && <p className="text-red-500">{cardError}</p>}
-      {success && <p className="text-green-500">{success}</p>}
+      {success && (
+        <div className="text-green-500">
+          <p>{success}</p>
+          <p>
+            Your Transaction Id:{" "}
+            <span className="text-orange-500">{transactionId}</span>
+          </p>
+        </div>
+      )}
     </>
   );
 };
